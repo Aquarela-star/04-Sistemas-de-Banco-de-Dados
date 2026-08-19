@@ -34,3 +34,49 @@ FROM
 
 ORDER BY
    id_curso ASC;
+
+
+SELECT table_name,
+       column_name,
+       data_type,
+       character_maximum_length AS tamanho,
+       is_nullable              AS aceita_nulo,
+       is_identity              AS e_identidade
+FROM information_schema.columns
+WHERE table_schema = 'public'
+  AND table_name IN ('curso', 'aluno')
+ORDER BY table_name, ordinal_position;
+
+SELECT indexname, indexdef FROM pg_indexes WHERE tablename = 'curso';
+
+SELECT 
+    nome,
+    id_curso
+FROM
+    aluno
+WHERE
+    id_curso = 1;
+ORDER BY
+    nome DESC;
+
+SELECT
+    c.nome AS curso,
+    c.id_Curso
+FROM
+    curso c
+WHERE
+    nome = 'Sistemas de Informacao';
+
+SELECT
+    a.nome AS aluno,
+    c.nome AS curso
+
+FROM
+   aluno a
+    JOIN
+        curso c
+    ON
+        c.id_curso  = a.id_curso
+ORDER BY
+  c.nome;
+
