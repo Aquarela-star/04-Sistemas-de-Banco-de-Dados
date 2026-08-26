@@ -1,4 +1,4 @@
--- Active: 1787611787759@@127.0.0.1@5432@bd_aula@public
+-- Active: 1787702169376@@127.0.0.1@5432@bd_aula@public
 
 DROP TABLE aluno;
 DROP TABLE curso;
@@ -255,3 +255,13 @@ FROM
 
 GROUP BY
   disciplina;
+
+
+SELECT
+    disciplina,
+    COUNT(*) AS "Avaliações",
+    ROUND(AVG(nota), 2) AS "Média"
+FROM
+    notas_alunos
+GROUP BY
+     disciplina;
