@@ -1,4 +1,4 @@
--- Active: 1787702169376@@127.0.0.1@5432@bd_vendas@public
+-- Active: 1788215423316@@127.0.0.1@5432@bd_vendas@public
 DROP TABLE IF EXISTS vendas_itens;
 
 CREATE TABLE vendas_itens(
@@ -129,3 +129,118 @@ FROM
     vendas_itens
 WHERE
     venda_id = 2010;
+
+
+-- Precedências entre AND e OR
+SELECT
+    venda_id,
+    produto_id,
+    valor_unitario,
+    data_venda
+FROM
+    vendas_itens
+WHERE
+    data_venda = '2025-09-01' OR data_venda = '2025-09-02' AND valor_unitario > 100;
+
+
+SELECT
+    venda_id,
+    produto_id,
+    valor_unitario,
+    data_venda
+FROM
+    vendas_itens
+WHERE
+    (data_venda = '2025-09-01' OR data_venda = '2025-09-02') AND valor_unitario > 100;
+
+
+SELECT
+    venda_id,
+    produto_id,
+    valor_unitario,
+    data_venda
+FROM
+    vendas_itens
+WHERE
+    --valor_unitario >= 50 AND valor_unitario <=100;
+    valor_unitario BETWEEN 50 AND 100
+ORDER BY
+    valor_unitario DESC;
+
+SELECT
+    venda_id,
+    produto_id,
+    valor_unitario,
+    data_venda
+FROM
+    vendas_itens
+WHERE
+    data_venda BETWEEN '2025-09-01' AND '2025-09-03'
+ORDER BY
+    data_venda;
+
+SELECT
+    venda_id,
+    produto_id,
+    valor_unitario,
+    data_venda
+FROM
+    vendas_itens
+WHERE
+    data_venda NOT BETWEEN '2025-09-01' AND '2025-09-03'
+ORDER BY
+    data_venda;
+
+
+SELECT
+    venda_id,
+    produto_id,
+    valor_unitario,
+    data_venda
+FROM
+    vendas_itens
+WHERE
+
+    produto_id IN (1,3,6)
+ORDER BY
+    produto_id;
+
+
+SELECT
+    venda_id,
+    produto_id,
+    valor_unitario,
+    data_venda
+FROM
+    vendas_itens
+WHERE
+    produto_id IN (1,3,6)
+    --AND (data_venda = '2025-09-01' OR data_venda = '2025-09-10');
+    AND (data_venda IN ('2025-09-01', '2025-09-10'));
+
+
+SELECT
+    venda_id,
+    produto_id,
+    observacao
+FROM
+    vendas_itens
+WHERE
+    -- % Qualquer sequencia de caracteres  
+    -- _ Exatamente um caractere, qualquer que seja
+    --observacao LIKE 'Entrega%';
+    --observacao LIKE '%loja%';
+    --observacao LIKE '%ntrega ex%';
+    --observacao ILIKE '%ntrega ex%';
+    observacao NOT LIKE '%ntrega ex%';
+
+
+SELECT
+    venda_id,
+    observacao
+
+FROM
+    vendas_itens
+
+WHERE
+    observacao IS NOT NULL;
