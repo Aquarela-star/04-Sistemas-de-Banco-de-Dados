@@ -1,4 +1,4 @@
--- Active: 1788215423316@@127.0.0.1@5432@bd_vendas@public
+-- Active: 1788911273316@@127.0.0.1@5432@bd_vendas@public
 DROP TABLE IF EXISTS vendas_itens;
 
 CREATE TABLE vendas_itens(
@@ -244,3 +244,96 @@ FROM
 
 WHERE
     observacao IS NOT NULL;
+
+
+SELECT
+    venda_id,
+    observacao
+FROM
+    vendas_itens
+WHERE
+    observacao NOT IN('Entrega expressa')
+    OR observacao IS NULL;
+
+
+SELECT
+    venda_id,
+    produto_id,
+    COALESCE(observacao, 'Sem observacao') AS "Observação"
+FROM
+    vendas_itens
+WHERE
+    venda_id = 2001;
+
+
+SELECT DISTINCT
+    valor_unitario
+FROM
+    vendas_itens
+ORDER BY
+    valor_unitario;
+
+
+
+SELECT 
+    COUNT(*) AS intens,
+    COUNT(observacao) AS itens_com_observacao,
+    COUNT(DISTINCT venda_id) AS vendas,
+    COUNT(DISTINCT produto_id) AS produtos,
+    SUM(valor_unitario) AS soma,
+    ROUND(AVG(valor_unitario),2) AS "média",
+    MIN(valor_unitario) AS menor_valor_unitario,
+    MAX(valor_unitario) AS maior_valor_unitario
+FROM
+    vendas_itens;
+
+
+
+
+
+SELECT 
+    venda_id,
+    SUM(valor_unitario) AS valor_total,
+    data_venda
+FROM
+    vendas_itens
+
+GROUP BY
+    venda_id,
+    data_venda
+ORDER BY
+    valor_total ASC;
+
+
+SELECT
+    produto_id,
+    SUM(valor_unitario) AS valor_final,
+    COUNT(produto_id) AS vezes_vendido
+FROM
+    vendas_itens
+GROUP BY
+produto_id
+ORDER BY
+    valor_final DESC,
+    vezes_vendido DESC;
+
+SELECT 
+    vendas_id,
+    SUM(valor_unitario) AS valor_total,
+    COUNT(*) AS itens
+
+FROM
+    vendas_itens
+
+GROUP BY
+    venda_id
+
+HAVING
+    SUM(valor_unitario) > 400
+
+
+ORDER BY
+    valor_total DESC;
+
+
+
