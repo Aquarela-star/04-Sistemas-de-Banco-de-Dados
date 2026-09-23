@@ -1,4 +1,4 @@
--- Active: 1789760665584@@127.0.0.1@5432@bd_hortifruti@public
+-- Active: 1790123255201@@127.0.0.1@5432@bd_hortifruti@public
 CREATE DATABASE bd_hortifruti;
 
 
@@ -74,14 +74,14 @@ INSERT INTO itens_venda
     (venda_id, data_venda, bairro_entrega, produto_id, produto_nome,
  categoria, unidade, quantidade, valor_unitario)
     VALUES
-    (3017, '2026-08-08', NULL, 7, 'Tomate', 'Legume', 'Kg', 1.340, 8.99),
-    (3017, '2026-08-08', NULL, 8, 'Alface-crespa', 'Legume', 'Kg', 0.800, 3.49),
-    (3017, '2026-08-08', NULL, 9, 'Morango', 'Legume', 'Kg', 1.400, 9.90);
+    (3017, '2026-08-08', NULL, 5, 'Tomate', 'Legume', 'Kg', 1.115, 8.99),
+    (3017, '2026-08-08', NULL, 10, 'Alface-crespa', 'Verdura', 'UN', 1.000, 3.29),
+    (3017, '2026-08-08', NULL, 4, 'Morango', 'Fruta', 'UN', 2.000, 9.90);
 
 SELECT * FROM itens_venda;
 -------------------------------------
-SELECT 
-  Id,
+SELECT DISTINCT
+  produto_id,
   produto_nome,
   categoria,
   unidade
@@ -90,8 +90,7 @@ FROM
  itens_venda
 
 ORDER BY
-    categoria ASC,
-    produto_nome ASC;
+    produto_id;
 --------------------------------------
 SELECT 
     venda_id,
